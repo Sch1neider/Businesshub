@@ -8,14 +8,14 @@ const stocks = [
 let updating = false;
 let stockData = {};
 
+let selectedStock = null;
+
 let priceChart = null;
 let distributionChart = null;
 
 
 async function loadStock(ticker) {
-
     try {
-
         const response =
             await fetch(`/api/quote/${ticker}`);
 
@@ -24,10 +24,8 @@ async function loadStock(ticker) {
         }
 
         return await response.json();
-
     }
     catch (error) {
-
         console.error(
             `Erro ao carregar ${ticker}:`,
             error
@@ -39,7 +37,6 @@ async function loadStock(ticker) {
 
 
 async function updateStocks() {
-
     if (updating) {
         return;
     }
@@ -73,9 +70,7 @@ async function updateStocks() {
 
     }
     finally {
-
         updating = false;
-
     }
 }
 
@@ -251,7 +246,6 @@ function updateStockCard(
             `Volume: ${formatNumber(data.volume)}`;
 
     }
-
 }
 
 
@@ -306,7 +300,6 @@ function showStockDetails(ticker) {
                 </h3>
 
             </div>
-
 
             <div class="details-price">
 
@@ -451,9 +444,14 @@ function setupStockClicks() {
                 const ticker =
                     card.dataset.ticker;
 
+
                 if (!ticker) {
                     return;
                 }
+
+
+                selectedStock =
+                    ticker;
 
 
                 cards.forEach(item => {
@@ -475,6 +473,9 @@ function setupStockClicks() {
                 );
 
 
+                updateExportButton();
+
+
                 document
                     .getElementById(
                         "stock-details"
@@ -487,7 +488,6 @@ function setupStockClicks() {
         );
 
     });
-
 }
 
 
@@ -548,7 +548,6 @@ function setupNavigation() {
         );
 
     });
-
 }
 
 
@@ -558,6 +557,7 @@ function updatePriceChart() {
         document.getElementById(
             "price-chart"
         );
+
 
     if (!canvas) {
         return;
@@ -573,6 +573,7 @@ function updatePriceChart() {
 
         const data =
             stockData[ticker];
+
 
         if (!data) {
             return;
@@ -604,15 +605,19 @@ function updatePriceChart() {
         new Chart(
             canvas,
             {
+
                 type: "bar",
+
 
                 data: {
 
                     labels: labels,
 
+
                     datasets: [
 
                         {
+
                             label: "Preço",
 
                             data: prices,
@@ -627,17 +632,22 @@ function updatePriceChart() {
 
                 },
 
+
                 options: {
 
                     responsive: true,
 
                     maintainAspectRatio: false,
 
+
                     plugins: {
 
                         legend: {
+
                             display: false
+
                         },
+
 
                         tooltip: {
 
@@ -657,11 +667,13 @@ function updatePriceChart() {
 
                     },
 
+
                     scales: {
 
                         y: {
 
                             beginAtZero: false,
+
 
                             ticks: {
 
@@ -683,7 +695,6 @@ function updatePriceChart() {
 
             }
         );
-
 }
 
 
@@ -693,6 +704,7 @@ function updateDistributionChart() {
         document.getElementById(
             "distribution-chart"
         );
+
 
     if (!canvas) {
         return;
@@ -708,6 +720,7 @@ function updateDistributionChart() {
 
         const data =
             stockData[ticker];
+
 
         if (!data) {
             return;
@@ -739,15 +752,19 @@ function updateDistributionChart() {
         new Chart(
             canvas,
             {
+
                 type: "pie",
+
 
                 data: {
 
                     labels: labels,
 
+
                     datasets: [
 
                         {
+
                             data: prices,
 
                             borderWidth: 2
@@ -758,11 +775,13 @@ function updateDistributionChart() {
 
                 },
 
+
                 options: {
 
                     responsive: true,
 
                     maintainAspectRatio: false,
+
 
                     plugins: {
 
@@ -771,6 +790,7 @@ function updateDistributionChart() {
                             position: "bottom"
 
                         },
+
 
                         tooltip: {
 
@@ -807,7 +827,6 @@ function updateDistributionChart() {
 
             }
         );
-
 }
 
 
@@ -817,6 +836,7 @@ async function checkAPI() {
         document.getElementById(
             "api-status"
         );
+
 
     if (!status) {
         return;
@@ -853,7 +873,6 @@ async function checkAPI() {
             "● API offline";
 
     }
-
 }
 
 
@@ -863,6 +882,7 @@ function updateMarketStatus() {
         document.getElementById(
             "market-status"
         );
+
 
     if (!status) {
         return;
@@ -887,7 +907,207 @@ function updateMarketStatus() {
             `${loaded}/${stocks.length}`;
 
     }
+}
 
+
+function updateExportButton() {
+
+    const button =
+        document.getElementById(
+            "export-csv"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    if (selectedStock) {
+
+        button.disabled = false;
+
+        button.textContent =
+            `↓ Exportar ${selectedStock}`;
+
+    }
+    else {
+
+        button.disabled = true;
+
+        button.textContent =
+            "↓ Selecione uma ação";
+
+    }
+}
+
+
+function exportCSV() {
+
+    if (!selectedStock) {
+
+        alert(
+            "Selecione uma ação antes de exportar."
+        );
+
+        return;
+    }
+
+
+    const stock =
+        stockData[selectedStock];
+
+
+    if (!stock) {
+
+        alert(
+            "Os dados desta ação ainda não estão disponíveis."
+        );
+
+        return;
+    }
+
+
+    const headers = [
+
+        "Ticker",
+
+        "Nome",
+
+        "Preço",
+
+        "Variação",
+
+        "Variação %",
+
+        "Abertura",
+
+        "Máxima",
+
+        "Mínima",
+
+        "Fechamento anterior",
+
+        "Volume",
+
+        "Máxima 52 semanas",
+
+        "Mínima 52 semanas",
+
+        "Moeda"
+
+    ];
+
+
+    const row = [
+
+        stock.ticker || selectedStock,
+
+        stock.name || "",
+
+        stock.price ?? "",
+
+        stock.change ?? "",
+
+        stock.changePercent ?? "",
+
+        stock.open ?? "",
+
+        stock.dayHigh ?? "",
+
+        stock.dayLow ?? "",
+
+        stock.previousClose ?? "",
+
+        stock.volume ?? "",
+
+        stock.fiftyTwoWeekHigh ?? "",
+
+        stock.fiftyTwoWeekLow ?? "",
+
+        stock.currency || ""
+
+    ];
+
+
+    const csv = [
+
+        headers,
+
+        row
+
+    ]
+
+        .map(values =>
+
+            values
+
+                .map(value =>
+
+                    `"${String(value)
+                        .replace(/"/g, '""')}"`
+                )
+
+                .join(";")
+
+        )
+
+        .join("\n");
+
+
+    const blob =
+        new Blob(
+            [
+                "\uFEFF" + csv
+            ],
+            {
+                type: "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    const date =
+        new Date()
+            .toISOString()
+            .slice(0, 10);
+
+
+    link.href =
+        url;
+
+
+    link.download =
+        `marketview_${selectedStock}_${date}.csv`;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+
+
+    URL.revokeObjectURL(
+        url
+    );
 }
 
 
@@ -896,6 +1116,26 @@ async function startMarket() {
     setupStockClicks();
 
     setupNavigation();
+
+
+    const exportButton =
+        document.getElementById(
+            "export-csv"
+        );
+
+
+    if (exportButton) {
+
+        exportButton.addEventListener(
+            "click",
+            exportCSV
+        );
+
+    }
+
+
+    updateExportButton();
+
 
     await checkAPI();
 
@@ -910,7 +1150,6 @@ async function startMarket() {
         },
         60000
     );
-
 }
 
 
