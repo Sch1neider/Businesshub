@@ -1,7 +1,7 @@
 #include "crow.h"
 #include "models/quote.h"
 #include "services/market_service.h"
-
+#include <cstdlib>
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -39,6 +39,7 @@ int main()
         }
 
         crow::response response(html);
+
         response.set_header(
             "Content-Type",
             "text/html; charset=UTF-8"
@@ -61,6 +62,7 @@ int main()
         }
 
         crow::response response(css);
+
         response.set_header(
             "Content-Type",
             "text/css; charset=UTF-8"
@@ -83,6 +85,7 @@ int main()
         }
 
         crow::response response(js);
+
         response.set_header(
             "Content-Type",
             "application/javascript; charset=UTF-8"
@@ -144,7 +147,13 @@ int main()
         return resposta;
     });
 
-    app.port(18080)
+    const char* portEnv = std::getenv("PORT");
+
+    int port = portEnv
+        ? std::stoi(portEnv)
+        : 18080;
+
+    app.port(port)
        .multithreaded()
        .run();
 }
