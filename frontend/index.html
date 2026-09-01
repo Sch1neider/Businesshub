@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <title>MarketView Soumans</title>
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            MARKETVIEW SOUMANS
+        </div>
+
+        <nav class="nav">
+
+            <a
+                href="#market"
+                class="nav-item active"
+                data-section="dashboard"
+            >
+                <span>▣</span>
+                Dashboard
+            </a>
+
+            <a
+                href="#stocks"
+                class="nav-item"
+                data-section="acoes"
+            >
+                <span>▤</span>
+                Ações
+            </a>
+
+            <a
+                href="#stock-details"
+                class="nav-item"
+                data-section="detalhes"
+            >
+                <span>◫</span>
+                Detalhes
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="nav-item">
+              
+
+            <div
+                id="api-status"
+                class="api-status"
+            >
+                ● Verificando API...
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <span class="page-label">
+                    MERCADO
+                </span>
+
+                <h1>
+                    Dashboard
+                </h1>
+            </div>
+
+            <div
+                id="market-status"
+                class="market-status"
+            >
+                Offline
+            </div>
+
+        </header>
+
+
+        <section id="market">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        VISÃO GERAL
+                    </span>
+
+                    <h2>
+                        Mercado
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="stocks">
+
+                <div
+                    class="stock"
+                    data-ticker="PETR4"
+                >
+
+                    <div class="stock-top">
+
+                        <div>
+
+                            <span class="stock-ticker">
+                                PETR4
+                            </span>
+
+                            <span class="stock-name">
+                                Petrobras
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <strong class="stock-price">
+                        --
+                    </strong>
+
+                    <span class="stock-change">
+                        --
+                    </span>
+
+                    <div class="stock-info">
+
+                        <span class="stock-open">
+                            Abertura: --
+                        </span>
+
+                        <span class="stock-high">
+                            Máxima: --
+                        </span>
+
+                        <span class="stock-low">
+                            Mínima: --
+                        </span>
+
+                        <span class="stock-volume">
+                            Volume: --
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stock"
+                    data-ticker="VALE3"
+                >
+
+                    <div class="stock-top">
+
+                        <div>
+
+                            <span class="stock-ticker">
+                                VALE3
+                            </span>
+
+                            <span class="stock-name">
+                                Vale
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <strong class="stock-price">
+                        --
+                    </strong>
+
+                    <span class="stock-change">
+                        --
+                    </span>
+
+                    <div class="stock-info">
+
+                        <span class="stock-open">
+                            Abertura: --
+                        </span>
+
+                        <span class="stock-high">
+                            Máxima: --
+                        </span>
+
+                        <span class="stock-low">
+                            Mínima: --
+                        </span>
+
+                        <span class="stock-volume">
+                            Volume: --
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stock"
+                    data-ticker="ITUB4"
+                >
+
+                    <div class="stock-top">
+
+                        <div>
+
+                            <span class="stock-ticker">
+                                ITUB4
+                            </span>
+
+                            <span class="stock-name">
+                                Itaú Unibanco
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <strong class="stock-price">
+                        --
+                    </strong>
+
+                    <span class="stock-change">
+                        --
+                    </span>
+
+                    <div class="stock-info">
+
+                        <span class="stock-open">
+                            Abertura: --
+                        </span>
+
+                        <span class="stock-high">
+                            Máxima: --
+                        </span>
+
+                        <span class="stock-low">
+                            Mínima: --
+                        </span>
+
+                        <span class="stock-volume">
+                            Volume: --
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="stock"
+                    data-ticker="BBDC4"
+                >
+
+                    <div class="stock-top">
+
+                        <div>
+
+                            <span class="stock-ticker">
+                                BBDC4
+                            </span>
+
+                            <span class="stock-name">
+                                Bradesco
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <strong class="stock-price">
+                        --
+                    </strong>
+
+                    <span class="stock-change">
+                        --
+                    </span>
+
+                    <div class="stock-info">
+
+                        <span class="stock-open">
+                            Abertura: --
+                        </span>
+
+                        <span class="stock-high">
+                            Máxima: --
+                        </span>
+
+                        <span class="stock-low">
+                            Mínima: --
+                        </span>
+
+                        <span class="stock-volume">
+                            Volume: --
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="stock-details">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ATIVO
+                    </span>
+
+                    <h2>
+                        Detalhes
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="stock-details-content"
+                class="stock-details-content"
+            >
+
+                <div class="empty-details">
+
+                    Selecione uma ação acima para visualizar os detalhes.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="charts">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ANÁLISES
+                    </span>
+
+                    <h2>
+                        Visão do mercado
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="charts-grid">
+
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                MERCADO
+                            </span>
+
+                            <h3>
+                                Comparação de preços
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container">
+
+                        <canvas id="price-chart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chart-card">
+
+                    <div class="chart-header">
+
+                        <div>
+
+                            <span class="chart-label">
+                                DISTRIBUIÇÃO
+                            </span>
+
+                            <h3>
+                                Ativos monitorados
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="chart-container chart-pie">
+
+                        <canvas id="distribution-chart"></canvas>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <footer>
+
+            <span>
+                MarketView
+            </span>
+
+            <span>
+                API conectada ao mercado
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
